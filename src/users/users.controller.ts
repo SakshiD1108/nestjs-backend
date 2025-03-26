@@ -4,7 +4,7 @@ import { UserRole } from './user.schema';
 import { Roles } from '../common/roles.decorator';
 import { RolesGuard } from '../common/roles.guard';
 import { AuthGuard } from '@nestjs/passport';
-import { JwtStrategy } from 'src/auth/jwt.strategy';
+import { JwtStrategy } from '../auth/jwt.strategy';
 
 @Controller('users')
 export class UsersController {

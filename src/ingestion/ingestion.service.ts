@@ -10,25 +10,25 @@ export class IngestionService {
   constructor(
     @InjectModel(Ingestion.name) private ingestionModel: Model<IngestionDocument>,
   ) {}
+
   async triggerIngestion(data: { source: string; metadata?: string }): Promise<{ message: string; ingestionId: string }> {
     this.logger.log(`Ingestion triggered for source: ${data.source}`);
-  
-    const ingestion = new this.ingestionModel({
+
+    // ✅ Corrected: Removed unnecessary save() call
+    const savedIngestion = await this.ingestionModel.create({
       source: data.source,
       metadata: data.metadata || '',
       status: 'Processing',
     });
-  
-    const savedIngestion = await ingestion.save() as IngestionDocument;
-  
+
     setTimeout(async () => {
       await this.ingestionModel.findByIdAndUpdate(savedIngestion._id, { status: 'Completed' });
       this.logger.log(`Ingestion completed for source: ${data.source}`);
     }, 5000);
-  
+
     return { 
       message: `Ingestion started for source: ${data.source}`, 
-      ingestionId: (savedIngestion._id as Types.ObjectId).toHexString()  // Ensure proper conversion
+      ingestionId: (savedIngestion._id as Types.ObjectId).toHexString()  
     };
   }
 

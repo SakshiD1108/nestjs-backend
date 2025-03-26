@@ -12,18 +12,18 @@ import { JwtStrategy } from 'src/auth/jwt.strategy';
 import { RolesGuard } from 'src/common/roles.guard';
 import { Roles } from 'src/common/roles.decorator';
 
-// import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+
 
 @Controller('documents')
 export class DocumentsController {
   constructor(private readonly documentsService: DocumentsService) {}
 
   @Post('upload')
-   @UseGuards(JwtStrategy, RolesGuard)  // ✅ Correct authentication guard
+   @UseGuards(JwtStrategy, RolesGuard)  
     @Roles('admin') 
   @UseInterceptors(FileInterceptor('file', {
     storage: diskStorage({
-      destination: './uploads', // Save files in the uploads folder
+      destination: './uploads', 
       filename: (req, file, cb) => {
         const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
         const fileExt = extname(file.originalname);
