@@ -6,6 +6,8 @@ import { DocumentsModule } from '../documents/documents.module';
 import { DocumentEntity, DocumentSchema } from '../documents/document.schema';
 import { JwtStrategy } from '../auth/jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from '../auth/auth.module';
 
 describe('DocumentsController (e2e)', () => {
   let app: INestApplication;
@@ -15,19 +17,17 @@ describe('DocumentsController (e2e)', () => {
   beforeAll(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
-        MongooseModule.forRoot('mongodb://localhost:27017/test_db'), // Use a separate test database
+        ConfigModule.forRoot({ isGlobal: true }),  
+        MongooseModule.forRoot('mongodb://localhost:27017/test_db'),
         MongooseModule.forFeature([{ name: DocumentEntity.name, schema: DocumentSchema }]),
-        PassportModule.register({ defaultStrategy: 'jwt' }), // Enable Passport JWT strategy
+        AuthModule,  
         DocumentsModule,
       ],
-      providers: [JwtStrategy], // Inject JwtStrategy
     }).compile();
-
+  
     app = moduleFixture.createNestApplication();
-    app.useGlobalPipes(new ValidationPipe());
     await app.init();
   });
-
   afterAll(async () => {
     await app.close();
   });

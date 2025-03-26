@@ -1,4 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
+import { MinLength } from 'class-validator';
 import { Document } from 'mongoose';
 
 export type UserDocument = User & Document;
@@ -19,7 +20,8 @@ export class User {
 
   @Prop({ required: true, unique: true })
   username: string;
-
+  
+  @MinLength(6)
   @Prop({ required: true })
   password: string;
 

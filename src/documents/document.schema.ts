@@ -2,7 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 @Schema()
-export class DocumentEntity extends Document {
+export class DocumentEntity {
   @Prop({ required: true })
   title: string;
 
@@ -12,5 +12,7 @@ export class DocumentEntity extends Document {
   @Prop({ required: true })
   filePath: string;
 }
+
+export type DocumentEntityDocument = DocumentEntity & Document;
 
 export const DocumentSchema = SchemaFactory.createForClass(DocumentEntity);

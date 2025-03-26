@@ -9,11 +9,11 @@ export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
   async findByEmail(email: string): Promise<User | null> {
-    return this.userModel.findOne({ email }).exec(); // ✅ Ensure this returns User | null
+    return this.userModel.findOne({ email })
   }
   
   async findById(id: string): Promise<User | null> {
-    return this.userModel.findById(id).exec(); // Ensure it returns a promise
+    return this.userModel.findById(id)
   }
 
   // 🔹 Get all users (Only for Admin)

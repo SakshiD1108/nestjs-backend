@@ -11,7 +11,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get()
-  @UseGuards(JwtStrategy, RolesGuard)  // ✅ Correct authentication guard
+  @UseGuards(JwtStrategy, RolesGuard)  
   @Roles('admin') 
   async getAllUsers() {
     return this.usersService.findAll();

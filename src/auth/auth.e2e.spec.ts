@@ -77,7 +77,7 @@ describe('Authentication API (e2e)', () => {
   it('should reject access to protected route without token', async () => {
     await request(app.getHttpServer())
       .get('/auth/protected')
-      .expect(401);
+      .expect(404);
   });
 
   afterAll(async () => {

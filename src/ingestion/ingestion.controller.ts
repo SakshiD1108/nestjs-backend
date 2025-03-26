@@ -10,16 +10,16 @@ import {
   BadRequestException 
 } from '@nestjs/common';
 import { IngestionService } from './ingestion.service';
-import { RolesGuard } from 'src/common/roles.guard';
-import { Roles } from 'src/common/roles.decorator';
-import { JwtStrategy } from '../auth/jwt.strategy';  // ✅ Use standard AuthGuard
+import { RolesGuard } from '../common/roles.guard';
+import { JwtStrategy } from '../auth/jwt.strategy';  
+import { Roles } from '../common/roles.decorator';
 
 @Controller('ingestion')
 export class IngestionController {
   constructor(private readonly ingestionService: IngestionService) {}
 
   @Post('trigger')
-  @UseGuards(JwtStrategy, RolesGuard)  // ✅ Proper authentication
+  @UseGuards(JwtStrategy, RolesGuard)  
   @Roles('admin') 
   async trigger(@Body() body: { source: string; metadata?: string }) {
     try {
