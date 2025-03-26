@@ -1,7 +1,7 @@
-**Overview
+*Overview
 This project is a NestJS-based backend service designed to handle user authentication, document management, and ingestion controls. It provides a set of APIs for managing users, roles, and document processing while integrating with a mocking ingestion system.
 
-**Features
+*Features
 User Authentication: Secure user registration, login, and logout.
 
 Role-based Access Control (RBAC): Admin, editor, and viewer roles with permissions.
@@ -15,7 +15,7 @@ Ingestion Trigger API: API to initiate ingestion using mocking.
 Ingestion Management: Tracks and monitors ongoing ingestion processes.
 
 
-***API Endpoints
+*API Endpoints
 1. Authentication APIs
 Method	Endpoint	Description
 POST	/auth/register	Register a new user
@@ -45,12 +45,9 @@ GET	/ingestion/status/:id	     Get ingestion process status
 please find the attched 
 
 
-**Installation & Setup
+*Installation & Setup
 Clone the Repository
 
-bash
-Copy
-Edit
 git clone <nestjs-backend>
 cd nestjs-backend
 Install Dependencies
@@ -61,5 +58,5 @@ DATABASE_URL=<your_database_url>
 JWT_SECRET=<your_jwt_secret>
 
 
-* Start the Server
+* Start the Server 
 npm run start:dev
